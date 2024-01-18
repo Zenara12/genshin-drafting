@@ -1,0 +1,35 @@
+@import './base.css';
+
+.container{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+.image-container{
+  max-height:auto;
+  max-width: 95px;
+  margin: 1rex;
+  padding: 2px;
+  border-radius: 2rex;
+}
+.image-name{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-wrap: wrap;
+  text-align: center;
+}
+.image-char{
+  max-width: 90px;
+  max-height: 90px;
+}
+.star-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.image-star{
+  max-width: auto;
+  max-height: 30px;
+}
