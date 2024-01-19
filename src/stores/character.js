@@ -1,10 +1,15 @@
 import { defineStore } from 'pinia'
 import { supabase } from '@/supabase';
+import { ref } from 'vue';
 
 export const useCharacterStore = defineStore('character', () => {
    
       const imgExt = ".png";
       const path ="https://rijakxntrvcnycjksjcb.supabase.co/storage/v1/object/public/characterIcon/";
+      const characters = ref([{id:"",
+      fullname:"",
+      star:0,
+      nickname:""}]);
       
       const fetchChar = async () =>{
         try {
@@ -13,12 +18,12 @@ export const useCharacterStore = defineStore('character', () => {
             .select('*')
             .order('star',{ascending:false})
           //console.log(chars);
-          
+          characters.value =chars;
           return chars;
         } catch (e) {
           if(e instanceof Error) alert (e.message);
         }
-      }
+      };
 
-  return { imgExt, path, fetchChar }
+  return { characters,imgExt, path, fetchChar }
 })
