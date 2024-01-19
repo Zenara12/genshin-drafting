@@ -17,7 +17,7 @@ charStore.fetchChar().then(value=>{ characters.value = value; return value});
 
 <template>
     <div class="container">
-      <h1>Genshin characters</h1> 
+      <h1>GENSHIN CHARACTERS</h1> 
     </div>
     <div class="container">
       <div v-for="character in characters" :key="character" :class="character.star == 5?'star5 image-container' : 'star4 image-container'">
