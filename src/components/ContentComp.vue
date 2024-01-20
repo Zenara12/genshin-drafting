@@ -4,15 +4,20 @@ import { ref } from 'vue';
 import {useCharacterStore} from '@/stores/character.js'
 import {useDraftingStore} from '@/stores/drafting.js'
 
+
 const draftStore=useDraftingStore();
 const charStore = useCharacterStore();
+
+
 const characters = ref([{id:"",
   fullname:"",
   star:0,
   nickname:""}]);
 const path = charStore.path;
 const imgExt = charStore.imgExt;
+
 charStore.fetchChar().then(value=>{ characters.value = value; return value});
+
 
 //console.log(charStore.characters);
 </script>
@@ -21,7 +26,8 @@ charStore.fetchChar().then(value=>{ characters.value = value; return value});
     
     <div class="container">
         
-        <h1>GENSHIN CHARACTERS</h1> 
+        <h1>GENSHIN CHARACTERS</h1>
+        {{ draftStore.Sequence[draftStore.seqCounter] }}
     </div>
         <div class="container">
             <div 

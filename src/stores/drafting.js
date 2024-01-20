@@ -10,43 +10,58 @@ export const useDraftingStore = defineStore('drafting', () => {
   const player = ref('aether');
   const pickSeq = ref([1,2,2,2,1]);
   const pickSeqCounter = ref(0);
-  const pickCounter = ref(0);
+  const pickCounter = ref(1);
+  let char;
 
   const Draft =(character)=>{
     if(seqCounter.value == Sequence.value.length){ return true };
-    let char = character;
+     char = character;
+     const playerNameInsert = (name) =>{
+        char['player']=name;
+        console.log(name);
+        return name;
+    }
+    const changeName=(name)=>{
+        let charname = name;
+        if(charname == 'aether'){
+            charname ='lumine';
+        }else{
+            charname ='aether'
+        }
+        return charname;
+    }
     
     switch(Sequence.value[seqCounter.value]){
         case 'ban':
             char['draft'] = 'ban';
-            char['player']=player.value;
-            console.log(player.value);
-            player.value ='lumine';
+            player.value=changeName(playerNameInsert(player.value));
             break;
         case 'pick':
             char['draft'] = 'pick';
-            console.log(player.value);
             
-            pickCounter.value+=1;
             if(pickCounter.value == pickSeq.value[pickSeqCounter.value]){
-                pickCounter.value=0;
-                pickSeqCounter.value+=1;
-                break;
+                player.value=changeName(playerNameInsert(player.value));
+                pickCounter.value=1;
+                pickSeqCounter.value++;
             }
-            if(player.value == 'aether'){
-                char['player']='aether';
-                player.value ='lumine';
-            }else{
-                char['player']='lumine';
-                player.value ='aether'
+            else{
+                
+                pickCounter.value++;
+                player.value=playerNameInsert(player.value);
+                
             }
+            console.log(pickCounter.value);
+            console.log(pickSeq.value[pickSeqCounter.value]);
             
             break;
     }
     charDraft.value.push(char);
     seqCounter.value+=1;
+
     
   }
 
-  return { Draft,charDraft  }
+
+
+  return { Draft,charDraft,Sequence,seqCounter  }
 })
