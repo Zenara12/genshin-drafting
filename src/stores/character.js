@@ -19,7 +19,11 @@ export const useCharacterStore = defineStore('character', () => {
             .order('star',{ascending:false})
           //console.log(chars);
           characters.value =chars;
-          return chars;
+          characters.value.map(item =>{
+            item['dsbl']=false;
+            return item;
+          });
+          return characters.value;
         } catch (e) {
           if(e instanceof Error) alert (e.message);
         }

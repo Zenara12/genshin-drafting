@@ -40,6 +40,10 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+main{
+  display: flex;
+  flex-direction: row;
+}
 
 .container{
   display: flex;
@@ -65,12 +69,21 @@ body {
   max-width: 90px;
   max-height: 90px;
 }
+
+.image-star{
+  max-width: auto;
+  max-height: 30px;
+}
 .star-container{
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.image-star{
-  max-width: auto;
-  max-height: 30px;
+.star5{
+  background: rgb(255,154,0);
+  background: linear-gradient(180deg, rgba(255,154,0,1) 0%, rgba(255,209,0,1) 100%);
+}
+.star4{
+  background: rgb(184,0,255);
+  background: linear-gradient(180deg, rgba(184,0,255,1) 0%, rgba(239,0,255,1) 100%);
 }

@@ -14,13 +14,15 @@ export const useDraftingStore = defineStore('drafting', () => {
   let char;
 
   const Draft =(character)=>{
-    if(seqCounter.value == Sequence.value.length){ return true };
-     char = character;
-     const playerNameInsert = (name) =>{
+    if(PhaseCounter.value > 1){return true}
+    
+    char = character;
+
+    const playerNameInsert = (name) =>{
         char['player']=name;
-        console.log(name);
         return name;
     }
+
     const changeName=(name)=>{
         let charname = name;
         if(charname == 'aether'){
@@ -50,18 +52,24 @@ export const useDraftingStore = defineStore('drafting', () => {
                 player.value=playerNameInsert(player.value);
                 
             }
-            console.log(pickCounter.value);
-            console.log(pickSeq.value[pickSeqCounter.value]);
             
             break;
     }
     charDraft.value.push(char);
     seqCounter.value+=1;
 
-    
+    if(seqCounter.value == Sequence.value.length){ 
+        PhaseCounter.value++;
+        player.value = 'lumine';
+        seqCounter.value=0;
+        pickSeqCounter.value=0;
+        pickCounter.value=1;
+        
+    };
+    return true;
   }
 
 
 
-  return { Draft,charDraft,Sequence,seqCounter  }
+  return { Draft,charDraft,Sequence,seqCounter,player  }
 })
