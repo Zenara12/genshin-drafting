@@ -3,6 +3,7 @@ import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 
 export const useDraftingStore = defineStore('drafting', () => {
+  const stopDraft = ref(true);
   const PhaseCounter = ref(0);
   const Sequence = ref(['ban','pick','pick','pick','pick','pick','pick','pick','pick']);
   const seqCounter = ref(0);
@@ -14,7 +15,10 @@ export const useDraftingStore = defineStore('drafting', () => {
   let char;
 
   const Draft =(character)=>{
-    if(PhaseCounter.value > 1){return true}
+    if(PhaseCounter.value > 1){
+        stopDraft.value = false;
+        return true
+    }
     
     char = character;
 
@@ -71,5 +75,5 @@ export const useDraftingStore = defineStore('drafting', () => {
 
 
 
-  return { Draft,charDraft,Sequence,seqCounter,player  }
+  return { Draft,charDraft,Sequence,seqCounter,player,stopDraft  }
 })

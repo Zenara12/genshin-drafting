@@ -22,7 +22,7 @@ charStore.fetchChar().then(value=>{ characters.value = value;});
 const oldIndex = ref();
 const currentIndex = ref();
 const imgClass = ref('image-container');
-const draftName = ref(draftStore.Sequence[draftStore.seqCounter]);
+const stopDraft = ref();
 
 const displayBtn = (index)=>{
   currentIndex.value = index;
@@ -50,12 +50,12 @@ const draftButton =(index)=>{
 
 <template>
     
-    <div class="container">
+    <div class="container" v-if="draftStore.stopDraft">
         
         <h1>GENSHIN CHARACTERS</h1>
         
     </div>
-        <div class="container">
+        <div class="container" v-if="draftStore.stopDraft">
            
               <div 
                   v-for="character,index in characters" 
@@ -72,10 +72,12 @@ const draftButton =(index)=>{
                       </div>
                       <img :src=path.concat(character.nickname.concat(imgExt)) alt="" class="image-char">
                       <div class="image-name">{{ character.fullname }}</div>
-                      <button @click="draftButton(index)" :id="`btn${index}`" 
-                      :class="draftStore.Sequence[draftStore.seqCounter] == 'ban'?'btn-draft btn-red':'btn-draft btn-blue'"
                       
-                      >{{ draftStore.Sequence[draftStore.seqCounter] }}</button>
+                        <button @click="draftButton(index)" :id="`btn${index}`" 
+                        :class="draftStore.Sequence[draftStore.seqCounter] == 'ban'?'btn-draft btn-red':'btn-draft btn-blue'"
+                        
+                        >{{ draftStore.Sequence[draftStore.seqCounter] }}</button>
+                      
                     </div>
                     
                   </label>
